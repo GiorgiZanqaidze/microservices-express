@@ -1,0 +1,28 @@
+{
+  "name": "microservices-express",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:api-gateway": "ts-node api-gateway/src/index.ts",
+    "start:user-service": "ts-node user-service/src/index.ts",
+    "start:product-service": "ts-node product-service/src/index.ts",
+    "build": "tsc -p api-gateway/tsconfig.json && tsc -p user-service/tsconfig.json && tsc -p product-service/tsconfig.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.9.0",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
