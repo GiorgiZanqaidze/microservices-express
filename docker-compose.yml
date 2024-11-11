@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - '3000:3000'
+    depends_on:
+      - user-service
+      - product-service
+    networks:
+      - ecommerce-network
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+
+  user-service:
+    build: ./user-service
+    ports:
+      - '4000:4000'
+    environment:
+      - PORT=4000
+      - MONGO_URI=mongodb://mongo:27017/users
+      - NODE_ENV=production
+    depends_on:
+      - mongo
+    networks:
+      - ecommerce-network
+
+  product-service:
+    build: ./product-service
+    ports:
+      - '5000:5000'
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb://mongo:27017/products
+      - NODE_ENV=production
+    depends_on:
+      - mongo
+    networks:
+      - ecommerce-network
+
+  mongo:
+    image: mongo:5.0
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - ecommerce-network
+
+networks:
+  ecommerce-network:
+
+volumes:
+  mongo-data:
